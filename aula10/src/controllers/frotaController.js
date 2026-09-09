@@ -36,4 +36,3 @@ const frotaController = {
 };
 
 module.exports = frotaController;
-
