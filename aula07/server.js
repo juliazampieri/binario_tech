@@ -3,7 +3,7 @@ const cors = require('cors');
 const scaniaRoutes = require('./src/routes/scaniaRoutes');
 
 const app = express();
-const PORT = 3000;
+const PORT = 3017;
 
 
 app.use(cors());

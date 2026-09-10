@@ -5,16 +5,16 @@ echo " AUDITORIA DE BANCO DE DADOS SQLITE - BINARIO TECH "
 echo "========================================================================"
 
 echo -e "\n[1] Cadastrando veiculos Scania..."
-curl -s -X POST http://localhost:300/api/v1/veiculos \ 
+curl -s -X POST http://localhost:3017/api/v1/veiculos \ 
 	-H "Content-Type: application/json" \
 	-d '{"placa": SCA-2026","montadore":"Scania","modelo":"R500"}' | jq .
 
 echo -e "\n[2] Cadastrando veiculos Mercedes-Benz..."
-curl -s -X POST http://localhost:300/api/v1/veiculos \
+curl -s -X POST http://localhost:3017/api/v1/veiculos \
         -H "Content-Type: application/json" \
         -d '{"placa": MBB-2026","montadore":"Mercedes-Benz","modelo":"Actros 2651"}' | jq .
 
 echo -e "\n[3] Listando todos os veiculos gravados no banco relacional..."
-curl -s http://localhost:3000/api/v1/veiculos | jq .
+curl -s http://localhost:3017/api/v1/veiculos | jq .
 
 
