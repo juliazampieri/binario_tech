@@ -27,6 +27,8 @@ app.listen(PORT, () => {
     console.log(`[Binario Tech] Servidor de Telemetria rodando em http://localhost:${PORT}`);
 });
 */
+
+
 const express = require('express');
 const app = express();
 const PORT = 3017; // <--- MUDAMOS APENAS A PORTA DE 3001 PARA 3000
@@ -64,8 +66,10 @@ app.get('/vw/info', (req, res) => {
     res.json({ montadora: "Volkswagen", status: "OK", sistema_telemetria: "Ativo" });
 });
 
+app.get('/api/v1/volvo', (req, res) => {
+    res.json({ montadora: "Volvo", modelo: "FH 540", status: "OK", conexao: true, velocidade_media: 80 });
+});
 
-// --- FIM DO ARQUIVO ---
 app.listen(PORT, () => {
     console.log(`[Binario Tech] Servidor de Telemetria rodando em http://localhost:${PORT}`);
 });
