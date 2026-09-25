@@ -29,7 +29,7 @@ app.listen(PORT, () => {
 */
 const express = require('express');
 const app = express();
-const PORT = 3000; // <--- MUDAMOS APENAS A PORTA DE 3001 PARA 3000
+const PORT = 3017; // <--- MUDAMOS APENAS A PORTA DE 3001 PARA 3000
 
 app.use(express.json());
 

@@ -1,31 +1,36 @@
 const express = require('express');
 const app = express();
-const PORT = 3000;
+const PORT = 3017;
 
 app.use(express.json());
 
-//Rota de status binario tech
 app.get('/status', (req, res) => {
-	res.json({
-		servidor:"Binario Tech Core",
-		status:"OPERACIONAL",
-		montadoras_atendidas: ["Scania", "Mercedes", "VW"],
-		uptime_segundos: process.uptime()
-	});
+	    res.json({
+		            servidor: "Binario Tech Core",
+		            status: "OPERACIONAL",
+		            montadoras_atendidas: ["Scania", "Mercedes", "VW"],
+		            uptime_segundos: process.uptime()
+		        });
 });
 
-//Rota de informacoes da montadora Scania
 app.get('/scania/info', (req, res) => {
-	res.json({
-		montadora: "Scania",
-		foco: "Caminhoes pesados e onibus",
-		sistema_telemetria: "Ativo",
-		unidades_conectadas: 1420
-	});
+	    res.json({
+		            montadora: "Scania",
+		            foco: "Caminhoes Pesados e Ônibus",
+		            sistema_telemetria: "Ativo",
+		            unidades_conectadas: 1420
+		        });
+});
+
+app.get('/vw/info', (req, res) => {
+	    res.json({
+		            montadora: "Volkswagen",
+		            foco: "Veiculos Comerciais Leves e Pesados",
+		            sistema_telemetria: "Ativo",
+		            unidades_conectadas: 980
+		        });
 });
 
 app.listen(PORT, () => {
-	console.log('Servidor rodando com sucesso na porta ${PORT}');
+	    console.log(`Servidor rodando com sucesso na porta ${PORT}`);
 });
-
-
