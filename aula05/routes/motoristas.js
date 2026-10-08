@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const validaCnh = require('../middlewares/validaCnh');
+
 
 let motoristas = [
     { id: 1, nome: "Carlos Silva", cnh: "12345678900", categoria: "E", ativo: true },
@@ -12,7 +14,7 @@ router.get('/', (req, res) => {
 });
 
 // POST /api/v1/motoristas (Com validacao inline)
-router.post('/', (req, res) => {
+router.post('/', validaCnh, (req, res) => {
     const { nome, cnh, categoria } = req.body;
 
     if (!nome || !cnh || !categoria) {

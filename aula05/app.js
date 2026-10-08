@@ -3,6 +3,9 @@ const cors = require('cors');
 const loggerMiddleware = require('./middlewares/logger');
 const authMiddleware = require('./middlewares/auth');
 const motoristasRouter = require('./routes/motoristas');
+const manutencoesRouter = require('./routes/manutencoes');
+
+
 
 const app = express();
 const PORT = 3017;
@@ -19,6 +22,8 @@ app.get('/api/v1/health', (req, res) => {
 
 // Rotas Protegidas por Autenticacao
 app.use('/api/v1/motoristas', authMiddleware, motoristasRouter);
+
+app.use('/api/v1/manutencoes', authMiddleware, manutencoesRouter);
 
 // Middleware Global de Tratamento de Erros 404 (Rota nao encontrada)
 app.use((req, res) => {

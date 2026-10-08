@@ -18,7 +18,7 @@ app.get('/api/v1/veiculos', (req, res) => {
         res.status(200).json(veiculos);
 });
 
-app.get('/api/v1/veiculos/id', (req, res) => {
+app.get('/api/v1/veiculos/:id', (req, res) => {
         const id = parseInt(req.params.id);
         const veiculo = veiculos.find(v => v.id === id);
         if (!veiculo) {
@@ -71,6 +71,32 @@ app.delete('/api/v1/veiculos/:id', (req, res) => {
         veiculos.splice(index, 1);
         res.status(200).json({ mensagem: `Veiculo ID ${id} removido com sucesso.`
         });
+});
+
+app.put('/api/v1/veiculos/:id', (req, res) => {
+        const id = parseInt(req.params.id);
+        const { placa, montadora, modelo, status } = req.body;
+
+        const veiculo = veiculos.find(v => v.id === id);
+
+        if (!veiculo) {
+                return res.status(404).json({
+                        erro: "Veiculo nao encontrado."
+                });
+        }
+
+        if (!placa || !montadora || !modelo || !status) {
+                return res.status(400).json({
+                        erro: "Campos 'placa', 'montadora', 'modelo' e 'status' sao obrigatorios."
+                });
+        }
+
+        veiculo.placa = placa;
+        veiculo.montadora = montadora;
+        veiculo.modelo = modelo;
+        veiculo.status = status.toUpperCase();
+
+        res.status(200).json(veiculo);
 });
 
 app.listen(PORT, () => {
