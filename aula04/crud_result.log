@@ -4,7 +4,7 @@
 
 [1] CADASTRANDO VEICULO 1...
 {
-  "id": 3,
+  "id": 4,
   "placa": "AAA-2026",
   "montadora": "Scania",
   "modelo": "R500",
@@ -13,18 +13,18 @@
 
 [2] CADASTRANDO VEICULO 2...
 {
-  "id": 4,
+  "id": 5,
   "placa": "BBB-2026",
   "montadora": "Mercedes-Benz",
   "modelo": "Actros",
   "status": "DISPONIVEL"
 }
 
-[3] ATUALIZANDO VEICULO 3...
+[3] ATUALIZANDO VEICULO 4...
 {
-  "mensagem": "Atatus atualizado com sucesso!",
+  "mensagem": "Status atualizado com sucesso!",
   "veiculo": {
-    "id": 3,
+    "id": 4,
     "placa": "AAA-2026",
     "montadora": "Scania",
     "modelo": "R500",
@@ -32,9 +32,9 @@
   }
 }
 
-[4] DELETANDO VEICULO 4...
+[4] DELETANDO VEICULO 5...
 {
-  "mensagem": "Veiculo ID 4 removido com sucesso."
+  "mensagem": "Veiculo ID 5 removido com sucesso."
 }
 
 ========================================

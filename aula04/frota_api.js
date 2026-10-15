@@ -58,7 +58,7 @@ app.patch('/api/v1/veiculos/:id/status', (req, res) => {
         }
 
         veiculo.status = status.toUpperCase();
-        res.status(200).json({ mensagem: "Atatus atualizado com sucesso!", veiculo
+        res.status(200).json({ mensagem: "Status atualizado com sucesso!", veiculo
 });
 });
 
