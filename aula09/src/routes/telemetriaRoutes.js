@@ -11,6 +11,7 @@ router.post('/veiculo-teste', async (req, res) => {
 });
 
 router.post('/', telemetriaController.registrarLeitura);
+router.get('/veiculo/:id', telemetriaController.buscarPorVeiculo);
 router.get('/relatorio', telemetriaController.listarRelatorioCompleto);
 
 module.exports = router;

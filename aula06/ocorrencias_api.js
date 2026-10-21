@@ -83,6 +83,24 @@ app.get('/api/v1/ocorrencias/montadora/:nome', async (req, res) => {
 });
 
 
+// ROTA 4: Excluir ocorrência por ID
+app.delete('/api/v1/ocorrencias/:id', async (req, res) => {
+    try {
+        const id = Number(req.params.id);
+        const ocorrencias = await lerOcorrencias();
+        const filtradas = ocorrencias.filter(o => o.id !== id);
+
+        if (filtradas.length === ocorrencias.length) {
+            return res.status(404).json({ erro: "Ocorrência não encontrada." });
+        }
+
+        await salvarOcorrencias(filtradas);
+        res.status(200).json({ mensagem: "Ocorrência removida com sucesso." });
+    } catch (erro) {
+        res.status(500).json({ erro: "Erro ao remover ocorrência." });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`[Binário Tech] API de Ocorrências ativa na porta ${PORT}`);
 });

@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const scaniaRoutes = require('./src/routes/scaniaRoutes');
-
+const mercedesRoutes = require('./src/routes/mercedesRoutes');
 const app = express();
 const PORT = 3017;
 
@@ -15,6 +15,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/v1/telemetria/scania', scaniaRoutes);
+app.use('/api/v1/telemetria/mercedes', mercedesRoutes);
 
 app.use((req, res) => {
 	res.status(404).json({ erro: "Modulo ou Rota de Telemetria nao encontrada." });

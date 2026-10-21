@@ -27,10 +27,30 @@ const telemetriaController = {
     }
   },
 
-  // Listar todas as leituras com dados do Veículo (INNER JOIN)
+  buscarPorVeiculo: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const leituras = await db('telemetria')
+        .where({ veiculo_id: id });
+
+      res.status(200).json(leituras);
+   
+    } catch (erro) {
+      console.error(erro);
+      res.status(500).json({
+        erro: "Erro ao buscar telemetria do veículo."
+      });
+    }
+
+  },
+
+  
+
+      // Listar todas as leituras com dados do Veículo (INNER JOIN)
   listarRelatorioCompleto: async (req, res) => {
     try {
-      const relatorio = await db('telemetria')
+      const relatorioQuery = db('telemetria')
         .join('veiculos', 'veiculos.id', '=', 'telemetria.veiculo_id')
         .select(
           'telemetria.id as telemetria_id',
@@ -42,6 +62,11 @@ const telemetriaController = {
           'telemetria.capturado_em'
         );
 
+      if (req.query.alerta === 'true') {
+        relatorioQuery.where('telemetria.temperatura_motor', '>', 95);
+      }
+
+      const relatorio = await relatorioQuery;
       res.status(200).json(relatorio);
     } catch (erro) {
       res.status(500).json({ erro: "Erro ao gerar relatório com Inner Join." });

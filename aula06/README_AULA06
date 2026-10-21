@@ -1,0 +1,91 @@
+AULA 06 — CONSULTA RÁPIDA PBE1
+Porta da API: 3017
+
+
+EXERCÍCIO 01 — GET de todas as ocorrências
+Servidor: precisa estar rodando.
+http GET http://localhost:3017/api/v1/ocorrencias
+
+
+
+EXERCÍCIO 02 — Filtrar Scania no arquivo
+jq '.[] | select(.montadora == "Scania")' ocorrencias.json
+
+Se precisar cadastrar uma ocorrência de teste (cria um registro):
+http POST http://localhost:3017/api/v1/ocorrencias montadora="Scania" placa="SCA-9988" descricao="Superaquecimento de motor" gravidade="ALTA"
+
+
+
+
+EXERCÍCIO 03 — GET por montadora
+Teste (servidor rodando):
+http GET http://localhost:3017/api/v1/ocorrencias/montadora/Scania
+
+Código para ocorrencias_api.js (adicionar uma vez, antes de app.listen):
+app.get('/api/v1/ocorrencias/montadora/:nome', async (req, res) => {
+    try {
+        const nome = req.params.nome.toLowerCase();
+        const ocorrencias = await lerOcorrencias();
+        const filtradas = ocorrencias.filter(
+            o => o.montadora.toLowerCase() === nome
+        );
+        res.status(200).json(filtradas);
+    } catch (erro) {
+        res.status(500).json({ erro: "Erro ao buscar ocorrências." });
+    }
+});
+
+
+
+EXERCÍCIO 04 — DELETE por ID
+Código para ocorrencias_api.js (adicionar uma vez, antes de app.listen):
+app.delete('/api/v1/ocorrencias/:id', async (req, res) => {
+    try {
+        const id = Number(req.params.id);
+        const ocorrencias = await lerOcorrencias();
+        const filtradas = ocorrencias.filter(o => o.id !== id);
+
+        if (filtradas.length === ocorrencias.length) {
+            return res.status(404).json({ erro: "Ocorrência não encontrada." });
+        }
+
+        await salvarOcorrencias(filtradas);
+        res.status(200).json({ mensagem: "Ocorrência removida com sucesso." });
+    } catch (erro) {
+        res.status(500).json({ erro: "Erro ao remover ocorrência." });
+    }
+});
+
+Teste DELETE (troque pelo ID correto):
+http DELETE http://localhost:3017/api/v1/ocorrencias/1792449011102
+
+Conferir o JSON:
+cat ocorrencias.json
+
+
+
+EXERCÍCIO 05 — Script de limpeza
+Abrir/editar:
+vi limpar_dados.sh
+
+Conteúdo de limpar_dados.sh:
+#!/bin/bash
+echo "Encerrando o processo Node.js..."
+fuser -k 3017/tcp
+echo "Excluindo ocorrencias.json..."
+rm -f ocorrencias.json
+echo "Ambiente de testes limpo!"
+
+Permissão de execução:
+chmod +x limpar_dados.sh
+
+Executar (encerra o processo da porta 3017 e APAGA ocorrencias.json):
+./limpar_dados.sh
+
+Conferir arquivos:
+ls
+
+SE ocorrencias.json for apagado e precisar recriá-lo:
+echo '[]' > ocorrencias.json
+Atenção: isso cria/substitui o conteúdo por um array vazio.
+
