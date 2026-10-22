@@ -1,0 +1,59 @@
+Exercicio 01:
+Efetue uma requisicao GET na rota de 'health' e verifique nos logs do terminal a mensagem gerada pelo 'loggerMiddleware'.
+
+node app.js
+curl -s http://localhost:3017/api/v1/health | jq .
+
+
+Exercicio 02:
+Crie um novo arquivo de rota 'routes/manutencoes.js' que gerencia orcaments de manutencao dos caminhões. Adicione rotas para listar e cadastrar manutencoes.
+
+Criamos o arquivo routes/manutencoes.js 
+
+
+Exercicio 03:
+Registre o novo roteador de manutencoes no arquivo 'app.js' sob o caminho '/api/v1/manutencoes', aplicando tambem o 'authMiddleware'.
+
+node app.js
+curl -s http://localhost:3017/api/v1/manutencoes | jq .
+
+ 
+Exercicio 04:
+Crie um middleware exclusivo de validacao de CNH chamado 'middlewares/validaCnh.js' que garante que a CNH informada no POST contenha exatamente 11 digitos numericos.
+
+vi middlewares/validaCnh.js
+
+
+Exercicio 05: 
+Aplique o middleware 'validaCnh' apenas na rota POST de motoristas e faca um teste via cURL enviando uma CNH invalida (ex: "123"). Confirme o retorno 400 Bad Request.
+
+
+node app.js
+
+curl -i -s -X POST http://localhost:3017/api/v1/motoristas -H "X-API-KEY: binario-tech-secret-2026" -H "Content-Type: application/json" -d '{"nome":"Roberto Souza","cnh":"123","categoria":"E"}'
+
+ 
+Exercicio 06:
+ 
+Faca uma requisicao GET para uma rota inexistente como '/api/v1/clientes' e confirme que o middleware global de 404 intercepta e responde em JSON padronizado.
+
+
+node app.js
+curl -i -s http://localhost:3017/api/v1/clientes
+
+
+Exercicio 07:
+Crie um script Bash chamado 'teste_seguranca.sh' que simula 3 tentativas de acesso sem chave de API e 1 tentativa com chave valida, salvando os retornos em 'audit_seguranca.log'.
+
+vi teste_seguranca.sh
+chmod +x teste_seguranca.sh
+./teste_seguranca.sh
+cat audit_seguranca.log
+
+ 
+Exercicio 08:
+Utilize o comando 'ps aux | grep node' no terminal Linux para encontrar o processo da API e encerre-o utilizando 'kill -9 <PID>'.
+
+fuser -k 3017/tcp
+
+
