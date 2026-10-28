@@ -18,6 +18,12 @@ const alertaSchema = new mongoose.Schema({
     type: Map,
     of: String
   },
+
+  tags: {
+    type: [String],
+    default: []
+  },
+
   registradoEm: {
     type: Date,
     default: Date.now

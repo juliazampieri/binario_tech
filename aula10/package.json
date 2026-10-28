@@ -1,3 +1,4 @@
+
 {
   "name": "aula10",
   "version": "1.0.0",
@@ -6,7 +7,8 @@
   "scripts": {
     "start": "node server.js",
     "migrate": "knex migrate:latest",
-    "seed": "knex seed:run"
+    "seed": "knex seed:run",
+    "db:reset": "knex migrate:rollback --all && knex migrate:latest && knex seed:run"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -15,3 +17,4 @@
     "sqlite3": "^5.1.7"
   }
 }
+
