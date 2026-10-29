@@ -3,7 +3,8 @@ const router = express.Router();
 const veiculoController = require('../controllers/veiculoController');
 const { regrasCadastroVeiculo } = require('../middlewares/veiculoValidator');
 const validarRequisicao = require('../middlewares/validarRequisicao');
+const validarContentType = require('../middlewares/validarContentType');
 
-router.post('/', regrasCadastroVeiculo, validarRequisicao, veiculoController.cadastrar);
+router.post('/', validarContentType, regrasCadastroVeiculo, validarRequisicao, veiculoController.cadastrar);
 
 module.exports = router;
