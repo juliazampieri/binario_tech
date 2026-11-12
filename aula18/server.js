@@ -5,7 +5,7 @@ const conectarBanco = require('./src/config/database');
 const provaRoutes = require('./src/routes/provaRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3017;
 
 app.use(cors());
 app.use(express.json());
@@ -18,4 +18,3 @@ conectarBanco().then(() => {
     console.log(`[Binário Tech] Servidor da Aula 18 ativo na porta ${PORT}`);
   });
 });
-
