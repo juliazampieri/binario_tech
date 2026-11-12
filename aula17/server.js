@@ -2,6 +2,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 const conectarBanco = require('./src/config/database');
 const autenticar = require('./src/middlewares/autenticar');
 
@@ -14,6 +15,17 @@ app.use(express.json());
 // Rota Pública de Healthcheck
 app.get('/api/v1/health', (req, res) => {
   res.json({ status: "PRONTO_PARA_EXAME", timestamp: new Date() });
+});
+
+// Rota para gerar token de teste
+app.post('/api/v1/auth/token-teste', (req, res) => {
+  const usuario = { nome: "aluno", id: 1 };
+
+  const token = jwt.sign(usuario, process.env.JWT_SECRET, {
+    expiresIn: '5m'
+  });
+
+  res.json({ token });
 });
 
 // Rota Protegida do Simulado
